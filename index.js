@@ -22,8 +22,12 @@ client.connect(err => {
         res.send(items)
       })
   })
-  app.get('/services', (req, res) => {
-    serviceCollection.find()
+  const query = {};
+// sort in descending (-1) order by length
+const sort = { length: -1 };
+const limit = 3;
+  app.get('/shorted', (req, res) => {
+    crudRead.find(query).sort(sort).limit(limit)
       .toArray((err, items) => {
         res.send(items)
       })
